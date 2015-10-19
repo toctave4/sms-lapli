@@ -60,5 +60,8 @@ class ObservationDePrix(models.Model):
     produit=models.ForeignKey(Produit, verbose_name="Produit")
     unitemesure=models.ForeignKey(UniteDeMesure, verbose_name="Unite de mesure")
 
+    class Meta:
+        verbose_name_plural="Observations de prix"
+
     def __str__(self):
         return self.marche + self.produit + self.prix
