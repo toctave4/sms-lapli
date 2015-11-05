@@ -7,8 +7,6 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('hydromet', '0013_auto_20151008_1018'),
-        ('base', '0011_merge'),
     ]
 
     operations = [

@@ -62,6 +62,19 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+    <script>
+        function get_Departement_Commune(){
+            new Ajax.Request('/admin/advanced_research/', {
+            method: 'post',
+            parameters: $H({'departement':$('id').getValue()}),
+            onSuccess: function(transport) {
+                var e = $('id')
+                if(transport.responseText)
+                    e.update(transport.responseText)
+            }
+            }); // end new Ajax.Request
+        }
+    </script>
 
 </head>
 
@@ -262,40 +275,6 @@
 
             <div class="right_col" role="main">
                 {% block content1 %}
-                <div class="row top_tiles">
-                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="tile-stats">
-                                <div class="icon" >
-                                <i class="fa fa-users"></i>
-                                <!-- <img src="images/pluie.jpeg"/> -->
-                                </div>
-                                <div class="count">{{ "nbAgent"|notification }}</div>
-
-                                <h3>{% if "nbAgent"|notification < '2' %} Agent inactif {% else %} Agents inactifs {% endif %}</h3>
-                                <p>Observateur</p>
-                            </div>
-                        </div>
-                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-envelope"></i></i>
-                                </div>
-                                <div class="count">{{ "msgNotValidate"|notification }}</div>
-
-                                <h3>Message non valide</h3>
-                                <p>Observation pluviometrique</p>
-                            </div>
-                        </div><!-- personNotSentMsg -->
-                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-sort-amount-desc"></i>
-                                </div>
-                                <div class="count">{{ "personNotSentMsg"|notification }}</div>
-
-                                <h3>{% if "personNotSentMsg"|notification < '2' %}Agent n'a pas envoye{% else %} Agents n'ont pas envoyes{% endif %}</h3>
-                                <p>Observation pluviometrique</p>
-                            </div>
-                        </div>
-                    </div>
 
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -303,7 +282,7 @@
 
                             <div class="row x_title">
                                 <div class="col-md-6">
-                                    <h4>Graphe</h4>
+                                    <h4>Recherche Avancee</h4>
                                 </div>
                                 <div class="col-md-6">
                                     <!-- <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
@@ -318,15 +297,26 @@
                                 <div style="width: 100%;">
                                    <!-- <div id="canvas_dahs" class="demo-placeholder" style="width: 100%; height:270px;"></div> -->
                                     <div id="sectionA" class="tab-pane fade in active">
-                                        <h2 class="sub-header">Graphe des donnees pluviometriques enregistrees</h2>
+                                        <form action="#">
+                                            <!--  <label for="departement">Departement</label>
+                                              <select id="departement"></select><br>
+                                              <label for="commune">Commune</label>
+                                              <select id="commune"></select><br>
+                                              <label for="section_communale">Section Communale</label>
+                                              <select id="section_communale"></select><br>
+                                              <input type="submit" value="Submit">-->
+                                            <ul>
+                                                {{ form.as_ul}}
+                                                <li> <label for="submit">&nbsp;</label>
+                                                    <input type="submit" id="submit" name="submit" value="submit"/>
+                                                </li>
+                                            </ul>
+                                        </form>
                                         <div class="table-responsive">
                                             <canvas id="canvas" width="720" height="300"></canvas>
                                         </div>
                                     </div>
-                                    {% comment %}
-                                        {% include "public/include/graphe.html" %}
-                                        {% include "public/include/carte.html" %}
-                                   {% endcomment %}
+
                                     <script type="text/javascript">
                                         // var canvas = document.getElementById('canvas');
                                         // canvas.height = 300;
@@ -385,57 +375,7 @@
                 </div>
                 <br />
 
-                <div class="row">
 
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="x_panel tile fixed_height_320">
-                                <div class="x_title">
-                                    <h2>Departement</h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <h4>.....</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                <div class="x_panel">
-                                    <div class="x_title">
-                                        <h2>Carte des enregistrements pluviometrique <small>geo-presentation</small></h2>
-                                                                                <div class="clearfix"></div>
-                                    </div>
-                                    <div class="x_content">
-                                        <div class="dashboard-widget-content">
-                                            
-                                            <!--<div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>-->
-                                            <div class="table-responsive" id="tablo">
-
-                                            </div>
-                                         </div>
-                                    </div>
-                                </div>
-                        </div>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                                <div class="x_panel">
-                                    <div class="x_title">
-                                        <a href="advanced_research/"><h2>Recherche Avancee</h2></a>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="x_content">
-                                        <div class="dashboard-widget-content">
-
-                                            <!--<div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>-->
-                                            <div class="table-responsive" id="tablo">
-
-                                            </div>
-                                         </div>
-                                    </div>
-                                </div>
-                        </div>
-                     </div>
-                    </div>
-
-                </div>
                 {% endblock %}
                 <!-- footer content -->
 {#                {% block footer1 %}#}

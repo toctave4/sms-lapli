@@ -222,6 +222,14 @@ INSTALLED_APPS = (
 
     # Must Be last
     'rapidsms.contrib.default',
+
+    #Pri_mache Apps
+    'pri_mache',
+
+    #Advanced_research Apps
+    'advanced_research',
+   # 'django-admin-visualsearch',
+    "opensearch",
 )
 
 INSTALLED_BACKENDS = {
@@ -293,5 +301,7 @@ ADMIN_REORDER = (
     # Reorder app models
     {'app': 'base',  'label': 'Structure de base', 'models': ('base.Departement', 'base.Commune', 'base.SectionCommunale', 'base.SiteSentinelle', 'base.Poste', 'base.PersonneContact')},
     {'app': 'hydromet',  'label': 'Collecte Pluviometrique', 'models': ('hydromet.TypeStation', 'hydromet.Station', 'hydromet.Observation', 'hydromet.UniteDeMesure', 'hydromet.StationObservers', 'hydromet.Log')},
+    {'app': 'pri_mache',  'label': 'Collecte Prix de marche', 'models': ('pri_mache.TypeMarche', 'pri_mache.Marche', 'pri_mache.TypeProduit', 'pri_mache.Produit', 'pri_mache.NiveauOffre', 'pri_mache.ObservationDePrix')},
+    {'app': 'advanced_research',  'label': 'Recherche Avancee', 'models': ('advanced_research.Variable', 'advanced_research.ObjectRequest', 'advanced_research.Requete')},
     {'app': 'auth',  'label': 'Autorisation',},
 )
