@@ -5,12 +5,12 @@ from django.contrib import admin
 from django.conf.urls import *
 from rapidsms.backends.kannel.views import KannelBackendView
 from django.views.generic import TemplateView
-from advanced_research import views
+
 
 
 urlpatterns = [
     url(r'^$', 'public.views.acc'),
-    url(r"^admin/advanced_research/$", views.adsearch),
+    
     url(r'^admin/', include(admin.site.urls)),
 
 
