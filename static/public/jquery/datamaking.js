@@ -10,7 +10,7 @@ $(document).ready(function(){
         var i;
         var objs =data.table
         for(i=0;i<objs.length;i++){
-            $('tbody').append("<tr><td>"+objs[i].dep+"</td><td>"+objs[i].com+"</td><td>"+objs[i].date+"</td><td>!"+objs[i].nbr+"!</td><td>"+objs[i].moy+"</td></tr>")
+            $('#tablo table tbody').append("<tr><td>"+objs[i].dep+"</td><td>"+objs[i].com+"</td><td>"+objs[i].date+"</td><td>!"+objs[i].nbr+"!</td><td>"+objs[i].moy+"</td></tr>")
         }
     });
 });
@@ -24,7 +24,7 @@ $(document).ready(function(){
         e.preventDefault()
         //alert("On m'a clique!!");
         var sltedId=$(this).children("a").attr("href");
-        alert(sltedId);
+        //alert(sltedId);
         $('.nav-sidebar li').removeAttr("class");//supprime les active
         $(this).attr("class","active");//ajoute les active au li selectionne
         //selection de tous les blocs ayant les articles
